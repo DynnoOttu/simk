@@ -9,7 +9,6 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="pegawai-form">
-
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'nama_pegawai')->textInput(['maxlength' => true]) ?>
