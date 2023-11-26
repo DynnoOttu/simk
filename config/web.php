@@ -26,6 +26,10 @@ $config = [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+        'authManager' => [
+            'class' => 'yii\rbac\DBManager',
+            'defaultRoles' => ['guest'],
+        ],
         'mailer' => [
             'class' => \yii\symfonymailer\Mailer::class,
             'viewPath' => '@app/mail',

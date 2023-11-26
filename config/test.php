@@ -22,6 +22,10 @@ return [
             'useFileTransport' => true,
             'messageClass' => 'yii\symfonymailer\Message'
         ],
+        'authManager' => [
+            'class' => 'yii\rbac\DBManager',
+            'defaultRoles' => ['guest'],
+        ],
         'assetManager' => [
             'basePath' => __DIR__ . '/../web/assets',
         ],

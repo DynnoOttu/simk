@@ -7,10 +7,12 @@ use app\models\PegawaiSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * PegawaiController implements the CRUD actions for Pegawai model.
  */
+
 class PegawaiController extends Controller
 {
     /**
@@ -55,6 +57,7 @@ class PegawaiController extends Controller
      */
     public function actionView($id_pegawai)
     {
+
         return $this->render('view', [
             'model' => $this->findModel($id_pegawai),
         ]);
@@ -67,19 +70,27 @@ class PegawaiController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Pegawai();
+        if (\Yii::$app->user->can('admin')) {
+            // create post
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id_pegawai' => $model->id_pegawai]);
+
+            $model = new Pegawai();
+
+            if ($this->request->isPost) {
+                if ($model->load($this->request->post()) && $model->save()) {
+                    return $this->redirect(['view', 'id_pegawai' => $model->id_pegawai]);
+                }
+            } else {
+                $model->loadDefaultValues();
             }
-        } else {
-            $model->loadDefaultValues();
-        }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Hanya admin yang dapat mengakses create pegawai');
+            return $this->redirect(['index']);
+        }
     }
 
     /**
@@ -91,15 +102,21 @@ class PegawaiController extends Controller
      */
     public function actionUpdate($id_pegawai)
     {
-        $model = $this->findModel($id_pegawai);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id_pegawai' => $model->id_pegawai]);
+        if (\Yii::$app->user->can('admin')) {
+            $model = $this->findModel($id_pegawai);
+
+            if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id_pegawai' => $model->id_pegawai]);
+            }
+
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Hanya admin yang dapat mengakses update pegawai');
+            return $this->redirect(['index']);
         }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -111,9 +128,14 @@ class PegawaiController extends Controller
      */
     public function actionDelete($id_pegawai)
     {
-        $this->findModel($id_pegawai)->delete();
+        if (\Yii::$app->user->can('admin')) {
+            $this->findModel($id_pegawai)->delete();
 
-        return $this->redirect(['index']);
+            return $this->redirect(['index']);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Hanya admin yang dapat mengakses delete pegawai');
+            return $this->redirect(['index']);
+        }
     }
 
     /**
