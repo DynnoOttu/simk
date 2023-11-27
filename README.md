@@ -86,33 +86,6 @@ Untuk halaman Create, Update dan Delete pada menu pegawai dan user hanya dapat d
 
 </table>
       
-</p>
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-## Contributing
-
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-## Related Project
-
-:rocket: [`Backend Recipes`](https://github.com/DynnoOttu/Angkasa_Backend)
-
-:rocket: [`Frontend Recipes Web`](https://github.com/DynnoOttu/angkasa-nextJS)
-
-:rocket: [`API`]([https://real-teal-dragonfly-gear.cyclic.app](https://wild-jade-kingfisher-yoke.cyclic.app))
-
-:rocket: [`Demo Recipenation`](https://angkasa-next-js.vercel.app)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 ## Developer
 
 <center>
